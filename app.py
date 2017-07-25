@@ -55,6 +55,22 @@ def newItem(category_id):
 		return redirect(url_for('showItems', category_id= item.category_id))
 
 
+# Route to edit a specific item of a category_id
+@app.route('/categories/<int:category_id>/items/<int:item_id>/edit', methods= ['GET', 'POST'])
+def editItem(category_id, item_id):
+	item = session.query(Items).filter_by(id= item_id).one()
+	if request.method == 'GET':
+		return render_template('edit_item.html', item= item)
+	elif request.method == 'POST':
+		item.name = request.form['name']
+		item.price = request.form['price']
+		item.desc = request.form['desc']
+		session.add(item)
+		session.commit()
+		flash('Item Edit Succefully')
+		return redirect(url_for('showItems', category_id= item.category_id))
+
+
 if __name__ == '__main__':
 	app.secret_key= 'Super_secretKey'
 	app.run(host='0.0.0.0', port=8080, debug=True)
