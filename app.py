@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 # Importing neccessary flask modules
-from flask import Flask, render_tempalate, url_for, request, jsonify, flash, redirect
+from flask import Flask, render_template, url_for, request, jsonify, flash, redirect
 
 # Creating instance of Flask 
 app = Flask(__name__, template_folder= 'templates')
@@ -22,6 +22,17 @@ DBSession = sessionmaker(bind=engine)
 
 # Instatiate the DBSession Class
 session = DBSession()
+
+
+# Route for showing all categories 
+@app.route('/')
+@app.route('/categories')
+def showCategories():
+	categories = session.query(Category).all()
+	return render_template('public_categories.html', categories= categories)
+
+
+
 
 
 if __name__ == '__main__':
