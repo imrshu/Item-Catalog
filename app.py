@@ -71,6 +71,19 @@ def editItem(category_id, item_id):
 		return redirect(url_for('showItems', category_id= item.category_id))
 
 
+# Route to delete a specific item of a category_id
+@app.route('/categories/<int:category_id>/items/<int:item_id>/delete', methods= ['GET', 'POST'])
+def delItem(category_id, item_id):
+	item = session.query(Items).filter_by(id= item_id).one()
+	if request.method == 'GET':
+		return render_template('delete_item.html', item= item)
+	elif request.method == 'POST':
+		session.delete(item)
+		session.commit()
+		flash('Item Deleted Successfully')
+		return redirect(url_for('showItems', category_id= item.category_id))
+
+
 if __name__ == '__main__':
 	app.secret_key= 'Super_secretKey'
 	app.run(host='0.0.0.0', port=8080, debug=True)
