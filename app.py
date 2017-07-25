@@ -32,6 +32,11 @@ def showCategories():
 	return render_template('public_categories.html', categories= categories)
 
 
+# Route to show specific category items
+@app.route('/categories/<int:category_id>/items')
+def showItems(category_id):
+	items = session.query(Items).filter_by(category_id= category_id).all()
+	return render_template('public_items.html', items= items, category_id= category_id)
 
 
 
