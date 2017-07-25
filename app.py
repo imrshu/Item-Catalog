@@ -84,6 +84,37 @@ def delItem(category_id, item_id):
 		return redirect(url_for('showItems', category_id= item.category_id))
 
 
+# API Endpoint for All Categories 
+@app.route('/categories/json')
+def categoriesEndpoint():
+	categories = session.query(Category).all()
+	if categories:
+		return jsonify(category= [i.serialize for i in categories])
+	else:
+		return jsonify({"error": "%s Not Found" % '404'})
+
+
+# API Endpoint for Items of a Specific category
+@app.route('/categories/<int:category_id>/json')
+def category_Id_Endpoint(category_id):
+	items = session.query(Items).filter_by(category_id= category_id).all()
+	if items:
+		return jsonify(category= [i.serialize for i in items])
+	else:
+		return jsonify({"error": "%s Not Found" % '404'})
+
+
+# API Endpoint for a specific item 
+@app.route('/items/<int:item_id>/json')
+def category_item_Endpoint(item_id):
+	item = session.query(Items).filter_by(id= item_id).one()
+	if not item:
+		return jsonify({"error": "%s Not Found" % '404'})
+	else:
+		return jsonify(item= item.serialize)
+
+
+
 if __name__ == '__main__':
 	app.secret_key= 'Super_secretKey'
 	app.run(host='0.0.0.0', port=8080, debug=True)
