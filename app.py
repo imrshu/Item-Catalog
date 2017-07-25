@@ -39,6 +39,21 @@ def showItems(category_id):
 	return render_template('public_items.html', items= items, category_id= category_id)
 
 
+# Route to create a new item for a category_id
+@app.route('/categories/<int:category_id>/items/new', methods= ['GET', 'POST'])
+def newItem(category_id):
+	if request.method == 'GET':
+		return render_template('newItem.html', category_id= category_id)
+	elif request.method == 'POST':
+		name = request.form['name']
+		price = request.form['price']
+		desc = request.form['desc']
+		item = Items(name= name, price= price, desc= desc, category_id= category_id)
+		session.add(item)
+		session.commit()
+		flash('A New Item Added')
+		return redirect(url_for('showItems', category_id= item.category_id))
+
 
 if __name__ == '__main__':
 	app.secret_key= 'Super_secretKey'
