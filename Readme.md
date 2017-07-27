@@ -44,3 +44,6 @@ If you are on Windows you need **Git Bash** Installed on your system
 - JSON Endpoint for All Categories http://localhost:8080/categories/json
 - JSON Endpoint for Items of a Specific category http://localhost:8080/categories/{category_id_here}/json
 - JSON Endpoint for a specific item http://localhost:8080/items/{item_id_here}/json
+
+
+#### Clone Or Download This Repo At [Item-Catalog](https://github.com/imrshu/Item-Catalog.git)
