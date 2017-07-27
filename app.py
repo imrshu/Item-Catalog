@@ -163,6 +163,48 @@ def gconnect():
     return output
 
 
+# Route for disconnect Google OAuth
+@app.route('/gdisconnect')
+def gdisconnect():
+    # Get the access_token
+    access_token = login_session['access_token']
+
+    # If access_token is Null
+    if access_token is None:
+        response = make_response(
+            json.dumps('Current user not connected.'), 401)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+
+    url = (
+        'https://accounts.google.com/o/oauth2/revoke?token=%s' %
+        login_session['access_token'])
+    h = httplib2.Http()
+    result = h.request(url, 'GET')[0]
+
+    # If request succeeds delete the sessions
+    if result['status'] == '200':
+        del login_session['access_token']
+        del login_session['gplus_id']
+        del login_session['username']
+        del login_session['email']
+        del login_session['picture']
+        del login_session['user_id']
+        del login_session['state']
+
+
+        # After loggin out redirecting to home postmessage
+        flash('Logout successfully')
+        return redirect(url_for('showCategories'))
+    else:
+        response = make_response(
+            json.dumps(
+                'Failed to revoke token for given user.',
+                400))
+        response.headers['Content-Type'] = 'application/json'
+        return response
+
+
 # Route for showing all categories
 @app.route('/')
 @app.route('/categories')
