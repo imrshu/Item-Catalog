@@ -1,0 +1,258 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+
+/* Grid system */
+.row {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+.col-2 {
+	width: 16.66%;
+}
+
+
+.col-10 {
+	width: 83.33%;
+}
+
+
+.col-12 {
+	width: 100%;
+}
+
+
+header {
+	background-color: #2d36ad;
+}
+
+
+button {
+	padding: 2px 15px;
+	font-size: 18px;
+}
+
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+
+input {
+	padding: 10px 10px;
+	display: block;
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 5px;
+	font-style: italic;
+	font-size: 18px;
+}
+
+/* App title */
+.title {
+	color: white;
+	padding: 2px 5px;
+}
+
+
+/* Google sign in button */
+#signInButton {
+	width: 20%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 150px;
+	padding-bottom: 10px;
+	text-align: center;
+	box-shadow: 0px 2px 3px grey;
+}
+
+/* Sign in button h2 tag style */
+#signInButton h2 {
+	padding: 10px 10px;
+	border-top: 2px solid blue;
+}
+
+
+/* User Profile pic style */
+#user_img {
+	border-radius: 50%;
+	width: 80px;
+	height: 80px;
+}
+
+
+/* Style for Categories */
+.categories {
+	width: 97%;
+	height: 550px;
+	overflow: auto;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 10px;
+	padding: 10px 15px;
+	box-shadow: 0px 2px 5px grey;
+	border-top: 2px solid blue;
+}
+
+
+/* Categories anchor tag Style */
+.categories h2 a {
+	color: green;
+	padding: 10px 10px;
+}
+
+
+/* Specific category items style */
+.category_items {
+	width: 97%;
+	height: 550px;
+	overflow: auto;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 10px;
+	padding: 10px 15px;
+	box-shadow: 0px 2px 5px grey;
+	border-top: 2px solid blue;	
+}
+
+
+/* Style for Items */
+.items {
+	padding: 0px 10px;
+}
+
+
+/* Item name Style */
+.item_name {
+	color: #e86512;
+	margin-top: 8px;
+}
+
+
+/* Item price style */
+.item_price {
+	color: green;
+	margin-top: 8px;
+}
+
+
+/* Item description style */
+.item_desc {
+	color: red;
+	margin-top: 8px;
+	margin-bottom: 5px;
+	font-size: 20px;
+}
+
+
+/* After Login Edit button style */
+#edit_btn {
+	border-radius: 20px 20px;
+}
+
+
+/* After Login Delete button style */
+#delete_btn {
+	border-radius: 20px 20px;
+}
+
+
+.newItem {
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	padding-bottom: 10px;
+	text-align: center;
+	border-top: 2px solid blue;
+	box-shadow: 0px 2px 3px grey;
+}
+
+
+.editItem {
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	padding-bottom: 10px;
+	text-align: center;
+	border-top: 2px solid blue;
+	box-shadow: 0px 2px 3px grey;	
+}
+
+
+.deleteItem {
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	padding-bottom: 10px;
+	text-align: center;
+	border-top: 2px solid blue;
+	box-shadow: 0px 2px 3px grey;	
+}
+
+
+.deleteItem .name {
+	color: red;
+}
+
+
+#flash_message {
+    visibility: hidden;
+    min-width: 250px; 
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff; 
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px; 
+    position: fixed; 
+    z-index: 1; 
+    left: 50%; 
+    bottom: 30px;
+}
+
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#flash_message.show {
+    visibility: visible; /* Show the snackbar */
+
+/* Add animation: Take 0.5 seconds to fade in and out the snackbar. 
+However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
