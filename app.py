@@ -34,6 +34,18 @@ DBSession = sessionmaker(bind=engine)
 # Instatiate the DBSession Class
 session = DBSession()
 
+# Fetching Client_id from client_secrets.json
+CLIENT_ID = json.loads(
+    open('Client_Secrets/client_secrets.json', 'r').read())['web']['client_id']
+
+
+# Create an anti-forgery state token
+@app.route('/login')
+def showLogin():
+    state = ''.join(random.choice(string.ascii_uppercase + string.digits)
+                    for x in xrange(32))
+    login_session['state'] = state
+    return render_template('login.html', STATE=state)
 
 
 # Route for showing all categories
