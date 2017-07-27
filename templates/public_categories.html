@@ -1,0 +1,42 @@
+<!-- main.html contains all necessary css or javascript links -->
+{% include "main.html" %}
+
+<!-- header.html includes the header -->
+{% include "header.html" %}
+
+	<!-- Grab the flash messages -->
+	{% with messages = get_flashed_messages() %}
+
+	<!-- Iterating over messages array -->
+	{% for message in messages %}
+		<h1 id="flash_message">{{message}}</h1>
+	{% endfor %}
+
+	{% endwith %}	
+
+	<div class="categories">
+		<h1>Categories</h1><br>
+
+	{% for category in categories %}
+	  	<h2><a href="{{url_for('showItems', category_id= category.id)}}">{{category.name}}</a></h2>
+	  	<br>
+	{% endfor %}
+
+	</div>
+
+
+<!-- toggle show class to flash_message class-->
+<script>
+	setInterval(function(){
+		var x = document.getElementById("flash_message")
+
+	    // Add the "show" class to DIV
+    	x.className = "show";
+    	setTimeout(function(){
+    		x.className= x.className.replace("show", "")
+    	}, 2000);
+	}, 0000);
+</script>
+
+<!-- footer.html contains html page ending tags -->
+{% extends "footer.html" %}

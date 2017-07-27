@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OAuth Sign In</title>
+  <!-- ADD: Stylesheet -->
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+	<!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+   <script async defer src="//apis.google.com/js/platform.js?onload=start"></script>
+</head>
+<body>
+
+  {% include "header.html" %}
+
+  <div id="signInButton">
+    <h2>Sign in with Google</h2>
+        <!-- Google sign in button -->
+      <div>  
+        <span class="g-signin"
+            data-scope="openid email"
+            data-clientid="383128886514-fn145kpdjsb1v98rfjric00f8fh6o34t.apps.googleusercontent.com"
+            data-redirecturi="postmessage"
+            data-accesstype="offline"
+            data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback"
+            data-approvalprompt="force">
+        </span>
+      </div>
+
+      <br>
+        
+        <!-- Continue as Guest button-->
+      <div>
+        <a href="{{url_for('showCategories')}}"><button>Guest</button></a>
+      </div>
+   </div>
+
+<div id="result"></div>
+
+<!-- Making Jquery AJAX Calls -->
+<script>
+function signInCallback(authResult) {
+  if (authResult['code']) {
+    // Hide the sign-in button now that the user is authorized
+    $('#signinButton').hide();
+    // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+    $.ajax({
+      type: 'POST',
+      url: '/gconnect?state={{STATE}}',
+      processData: false,
+      data: authResult['code'],
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result)
+        {
+          $('#signInButton').html('<h1>Welcome<h1></br>'+ result + '</br>Redirecting...');
+         
+          setInterval(function() {
+           window.location.href = "/categories";
+          }, 4000);        
+        }
+       }
+    });// AJAX method ends
+  }
+   else if (authResult['error']) // If request receives error
+   {
+ 	console.log('There was an error: ' + authResult['error']); 
+   }
+ 	 else
+   	 {
+        	$('#result').html('Failed to make a server-side call. Check your configuration and console.');
+     }
+  }// signInCallback ends
+</script>
+
+</body>
+</html>

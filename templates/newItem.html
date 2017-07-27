@@ -1,0 +1,22 @@
+<!-- main.html contains all necessary css or javascript links -->
+{% include "main.html" %}
+
+<!-- header.html includes the header -->
+{% include "header.html" %}
+
+	<div class="newItem">
+		
+	<h1>Add Item For {{category_name}} Category</h1>
+
+	<form action="{{url_for('newItem', category_id=category_id)}}" method="POST">
+		<input type="text" name="name" placeholder="Enter item name" required>
+		<input type="text" name="price" placeholder="enter price" required>
+		<input type="text" name="desc" placeholder="enter description" required>
+
+		<input type="submit" value="add item">
+	</form>
+
+	</div>
+
+<!-- footer.html contains html page ending tags -->
+{% extends "footer.html" %}

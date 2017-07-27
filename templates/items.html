@@ -1,0 +1,59 @@
+<!-- main.html contains all necessary css or javascript links -->
+{% include "main.html" %}
+
+<!-- header.html includes the header -->
+{% include "header.html" %}
+
+	<!-- Grab the flash messages -->
+	{% with messages = get_flashed_messages() %}
+
+	<!-- Iterating over messages array -->
+	{% for message in messages %}
+		<h1 id="flash_message">{{message}}</h1>
+	{% endfor %}
+
+	{% endwith %}
+
+
+	<div class="category_items">
+		<div class="row">
+			<div class="col-10">
+				<h1>{{category_name}} Category Items</h1>
+			</div>
+			<div class="col-2">
+				<!-- Button for adding a new item -->
+				<span><a href="{{url_for('newItem', category_id= category_id)}}"><button>Add item</button></a></span>
+				<!-- Go back button -->
+				<span><a href="{{url_for('showCategories')}}"><button>Back</button></a></span>
+			</div>	
+		</div>
+	
+ 	<div class="items">
+	<!-- Show all items of that category -->
+	{% for item in items %}
+ 		<h2 class="item_name">{{item.name}}</h2>
+		<h3 class="item_price">{{item.price}}</h3>
+		<p class="item_desc">{{item.desc}}</p>
+		<span><a href="{{url_for('editItem',category_id= category_id, item_id= item.id)}}"><button id="edit_btn">Edit</button></a></span>
+		<span><a href="{{url_for('delItem',category_id= category_id, item_id= item.id)}}"><button
+		id="delete_btn">Delete</button></a></span>
+	{% endfor %}
+	</div>
+
+
+<!-- toggle show class to flash_message class-->
+<script>
+	setInterval(function(){
+		var x = document.getElementById("flash_message")
+
+	    // Add the "show" class to DIV
+    	x.className = "show";
+    	setTimeout(function(){
+    		x.className= x.className.replace("show", "")
+    	}, 2000);
+	}, 0000);
+</script>
+
+
+<!-- footer.html contains html page ending tags -->
+{% extends "footer.html" %}

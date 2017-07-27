@@ -1,0 +1,18 @@
+<!-- main.html contains all necessary css or javascript links -->
+{% include "main.html" %}
+
+<!-- header.html includes the header -->
+{% include "header.html" %}
+
+	<div class="deleteItem">
+	
+	<h1>Are you sure to delete <span class="name">{{item.name}}</span> Item</h1>
+
+	<form action="{{url_for('delItem', category_id= item.category_id, item_id= item.id)}}" method="POST">
+		<input type="submit" value="Delete item">
+	</form>
+
+	</div>
+
+<!-- footer.html contains html page ending tags -->
+{% extends "footer.html" %}

@@ -1,0 +1,19 @@
+<!-- main.html contains all necessary css or javascript links -->
+{% include "main.html" %}
+
+<!-- header.html includes the header -->
+{% include "header.html" %}
+
+	<div class="categories">
+		<h1>Categories</h1><br>
+
+	<!-- Showing all of the categories -->
+	{% for category in categories %}
+		<h2><a href="{{url_for('showItems', category_id= category.id)}}">{{category.name}}</a></h2>
+		<br>
+	{% endfor %}
+
+	</div>
+
+<!-- footer.html contains html page ending tags -->
+{% extends "footer.html" %}
